@@ -34,7 +34,7 @@ jobs:
       - name: Build Web
         # LƯU Ý: Thay 'TEN_REPO_CUA_BAN' bằng tên repository thực tế của bạn. 
         # Ví dụ nếu link là github.com/username/tool-ketoan thì thay thành "/tool-ketoan/"
-        run: flutter build web --release --base-href "/TEN_REPO_CUA_BAN/"
+        run: flutter build web --release --base-href "/Tool_Phan_Bo_Doanh_Thu/"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
