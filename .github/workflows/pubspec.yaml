@@ -1,0 +1,46 @@
+name: Deploy Flutter Web to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main # Đổi thành 'master' nếu branch chính của bạn tên là master
+
+# Phân quyền cần thiết để GitHub Actions có thể deploy lên Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable' # Sử dụng bản Flutter ổn định mới nhất
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Build Web
+        # LƯU Ý: Thay 'TEN_REPO_CUA_BAN' bằng tên repository thực tế của bạn. 
+        # Ví dụ nếu link là github.com/username/tool-ketoan thì thay thành "/tool-ketoan/"
+        run: flutter build web --release --base-href "/TEN_REPO_CUA_BAN/"
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: 'build/web' # Đường dẫn chứa file web sau khi build xong
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
