@@ -903,7 +903,7 @@ class _RevenueCalculatorScreenState extends State<RevenueCalculatorScreen> {
     );
   }
 
-  // --- UI BẢNG 3: KẾT QUẢ ---
+  // --- UI BẢNG 3: KẾT QUẢ --
   Widget _buildResultCard() {
     return Card(
       shape: RoundedRectangleBorder(
